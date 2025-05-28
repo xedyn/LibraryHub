@@ -24,6 +24,7 @@ LibraryHub to aplikacja webowa do zarządzania biblioteką, która umożliwia:
 ### Wymagania
 - Python 3.7+
 - pip
+- pip install Flask==2.3.2 Flask-Login==0.6.2 bcrypt==4.0.1 Werkzeug==2.3.7 itsdangerous==2.2.0 Jinja2==3.1.6 MarkupSafe==3.0.2 click==8.2.1 blinker==1.9.0 colorama==0.4.6
 
 ### Instalacja
 
@@ -33,7 +34,7 @@ git clone https://github.com/xedyn/LibraryHub.git
 cd LibraryHub
 
 # Zainstaluj zależności
-pip install flask flask-login bcrypt
+pip install Flask==2.3.2 Flask-Login==0.6.2 bcrypt==4.0.1 Werkzeug==2.3.7 itsdangerous==2.2.0 Jinja2==3.1.6 MarkupSafe==3.0.2 click==8.2.1 blinker==1.9.0 colorama==0.4.6
 
 # Uruchom aplikację
 python app.py
