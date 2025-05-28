@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mt-4">
+    <div class="card-body">
+        <h1 class="card-title">Zarządzaj opłatami</h1>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Użytkownik</th>
+                <th>Tytuł książki</th>
+                <th>Data wypożyczenia</th>
+                <th>Kwota (PLN)</th>
+                <th>Data naliczenia</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fine in fines %}
+            <tr>
+                <td>{{ fine[1] }}</td>
+                <td>{{ fine[2] }}</td>
+                <td>{{ fine[7] }}</td>
+                <td>{{ fine[3]|round(2) }}</td>
+                <td>{{ fine[4] }}</td>
+                <td>
+                    <a href="{{ url_for('pay_fine', borrow_id=fine[6]) }}" class="btn btn-sm btn-success" onclick="return confirm('Czy na pewno oznaczyć jako zapłacone i zwrócone?')">Zapłacono</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if not fines %}
+            <tr>
+                <td colspan="6" class="text-center">Brak nieuregulowanych opłat</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

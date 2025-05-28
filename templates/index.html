@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mt-5">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="LibraryHub Logo" class="img-fluid mb-4"
+         style="max-width: 200px;">
+    <h1 class="display-4">Witaj w LibraryHub!</h1>
+    <p class="lead">
+        LibraryHub to nowoczesna platforma do zarządzania biblioteką, która umożliwia łatwe wypożyczanie i zwracanie
+        książek, przeglądanie katalogu oraz administrowanie użytkownikami i opłatami.
+    </p>
+    <div class="card mx-auto mt-4" style="max-width: 600px;">
+        <div class="card-body">
+            <h3 class="card-title">Funkcjonalności</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Logowanie i rejestracja:</strong> Twórz konto i loguj się, aby
+                    uzyskać dostęp do pełnych możliwości.
+                </li>
+                <li class="list-group-item"><strong>Katalog książek:</strong> Przeglądaj, wyszukuj, wypożyczaj i zwracaj
+                    książki. Każda książka ma limit 30 dni na zwrot.
+                </li>
+                <li class="list-group-item"><strong>Profil użytkownika:</strong> Sprawdzaj historię wypożyczeń, terminy
+                    zwrotów i naliczone opłaty (0,60 PLN za dzień spóźnienia).
+                </li>
+                <li class="list-group-item"><strong>Panel administracyjny:</strong> Zarządzaj książkami, użytkownikami i
+                    opłatami za spóźnienia.
+                </li>
+                <li class="list-group-item"><strong>Popularne książki:</strong> Zobacz najczęściej wypożyczane tytuły.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <a href="{{ url_for('catalog') }}" class="btn btn-primary btn-lg mt-4">Przejdź do katalogu</a>
+</div>
+{% endblock %}

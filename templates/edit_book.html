@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mt-4">
+    <div class="card-body">
+        <h1 class="card-title">Edytuj książkę</h1>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Tytuł</label>
+                <input type="text" name="title" class="form-control" value="{{ book[1] }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Autor</label>
+                <input type="text" name="author" class="form-control" value="{{ book[2] }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ISBN</label>
+                <input type="text" name="isbn" class="form-control" value="{{ book[6] if book|length > 6 else '' }}" required>
+                <div class="form-text">Format: 978-83-xxxxx-xx-x lub 13 cyfr bez myślników</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Dostępne egzemplarze</label>
+                <input type="number" name="available" class="form-control" value="{{ book[4] }}" min="0" max="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
+            <a href="{{ url_for('catalog') }}" class="btn btn-secondary">Anuluj</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

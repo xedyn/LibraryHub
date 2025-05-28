@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="card-title">Najpopularniejsze książki</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Liczba wypożyczeń</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>{{ book[1] }}</td>
+        <td>{{ book[2] }}</td>
+        <td>{{ book[3] }}</td>
+    </tr>
+    {% endfor %}
+    {% if not books %}
+    <tr>
+        <td colspan="3" class="text-center">Brak książek</td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mt-4">
+    <div class="card-body">
+        <h1 class="card-title">Logowanie</h1>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nazwa użytkownika</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hasło</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Zaloguj</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

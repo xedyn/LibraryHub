@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mt-4">
+    <div class="card-body">
+        <h1 class="card-title">
+            {% if viewed_user %}
+            Profil użytkownika: {{ viewed_user.username }}
+            {% if current_user.is_admin %}
+            <small class="text-muted">(widok administratora)</small>
+            {% endif %}
+            {% else %}
+            Profil użytkownika
+            {% endif %}
+        </h1>
+
+        <p><strong>Nazwa użytkownika:</strong> {{ viewed_user.username if viewed_user else current_user.username }}</p>
+
+        {% if not viewed_user %}
+        <h3>Zmień hasło</h3>
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nowe hasło</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Zmień hasło</button>
+        </form>
+        {% endif %}
+
+        <h3 class="mt-4">Historia wypożyczeń</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Data wypożyczenia</th>
+                <th>Termin zwrotu</th>
+                <th>Status</th>
+                <th>Pozostały czas</th>
+                {% if viewed_user and current_user.is_admin %}
+                <th>Akcje</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for borrow in borrows %}
+            <tr>
+                <td>{{ borrow[0] }}</td>
+                <td>{{ borrow[1] }}</td>
+                <td>{{ borrow[2] if borrow[3] else borrow[2] }}</td>
+                <td>
+                    {% if borrow[3] %}
+                    <span class="badge bg-success">Zwrócona</span>
+                    {% else %}
+                    <span class="badge bg-warning">Wypożyczona</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not borrow[3] %}
+                    {% if borrow[4] > 0 %}
+                    <span class="countdown text-success" data-return-date="{{ borrow[2] }}">
+                                <i class="fas fa-clock"></i> <span class="time-display">{{ borrow[4] }} dni</span>
+                            </span>
+                    {% else %}
+                    <span class="text-danger">
+                                <i class="fas fa-exclamation-triangle"></i> Przeterminowana
+                            </span>
+                    {% endif %}
+                    {% else %}
+                    <span class="text-muted">-</span>
+                    {% endif %}
+                </td>
+                {% if viewed_user and current_user.is_admin %}
+                <td>
+                    {% if not borrow[3] %}
+                    <a href="{{ url_for('admin_return_book', user_id=viewed_user.id, book_title=borrow[0]) }}"
+                       class="btn btn-sm btn-success"
+                       onclick="return confirm('Czy na pewno oznaczyć jako zwróconą?')">
+                        Oznacz jako zwróconą
+                    </a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            {% if not borrows %}
+            <tr>
+                <td colspan="{% if viewed_user and current_user.is_admin %}6{% else %}5{% endif %}" class="text-center">Brak wypożyczeń</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+        {% if viewed_user and current_user.is_admin %}
+        <div class="mt-4">
+            <a href="{{ url_for('manage_users') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Powrót do zarządzania użytkownikami
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function updateCountdowns() {
+        const countdowns = document.querySelectorAll('.countdown');
+        const now = new Date();
+
+        countdowns.forEach(countdown => {
+            const returnDate = new Date(countdown.dataset.returnDate);
+            const timeDisplay = countdown.querySelector('.time-display');
+
+            if (returnDate > now) {
+                const timeDiff = returnDate - now;
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+                if (days > 0) {
+                    timeDisplay.textContent = `${days} dni, ${hours}h ${minutes}m`;
+                } else if (hours > 0) {
+                    timeDisplay.textContent = `${hours}h ${minutes}m`;
+                    countdown.className = 'countdown text-warning';
+                } else {
+                    timeDisplay.textContent = `${minutes}m`;
+                    countdown.className = 'countdown text-danger';
+                }
+            } else {
+                countdown.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Przeterminowana';
+                countdown.className = 'text-danger';
+            }
+        });
+    }
+
+    // Aktualizuj co minutę
+    setInterval(updateCountdowns, 60000);
+
+    // Początkowa aktualizacja
+    updateCountdowns();
+</script>
+{% endblock %}
