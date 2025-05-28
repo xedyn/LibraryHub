@@ -32,8 +32,15 @@ LibraryHub to aplikacja webowa do zarządzania biblioteką, która umożliwia:
 # Sklonuj repozytorium
 git clone https://github.com/xedyn/LibraryHub.git
 cd LibraryHub
+# Uruchom CMD w głównym folderze gdzie znajduje się app.py:
 
-# Zainstaluj zależności
+# Utwórz środowisko wirtualne
+python -m venv venv
+
+# Aktywuj środowisko
+venv\Scripts\activate
+
+# Następnie zainstaluj zależności
 pip install Flask==2.3.2 Flask-Login==0.6.2 bcrypt==4.0.1 Werkzeug==2.3.7 itsdangerous==2.2.0 Jinja2==3.1.6 MarkupSafe==3.0.2 click==8.2.1 blinker==1.9.0 colorama==0.4.6
 
 # Uruchom aplikację
