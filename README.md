@@ -1,28 +1,34 @@
-📚 LibraryHub - System Zarządzania Biblioteką
+# 📚 LibraryHub - System Zarządzania Biblioteką
 
-📖 Opis projektu
+## 📖 Opis projektu
+
 LibraryHub to aplikacja webowa do zarządzania biblioteką, która umożliwia:
-* Wypożyczanie i zwracanie książek
-* Zarządzanie katalogiem książek z numerami ISBN
-* System kar za spóźnienia
-* Panel administratora
-* Automatyczne odliczanie czasu wypożyczeń
 
-🛠️ Technologie
-Backend: Python Flask
-Frontend: HTML, CSS, JavaScript, Bootstrap 5
-Baza danych: SQLite
-Bezpieczeństwo: bcrypt (hashowanie haseł)
-UI Framework: Bootstrap 5.3.0
-Ikony: FontAwesome 6.0.0
+- **Wypożyczanie i zwracanie książek** z automatycznym systemem terminów
+- **Zarządzanie katalogiem książek** z walidacją numerów ISBN
+- **System kar za spóźnienia** z automatycznym naliczaniem
+- **Panel administratora** z pełnymi uprawnieniami zarządzania
+- **Automatyczne odliczanie czasu** wypożyczeń w czasie rzeczywistym
 
-⚡ Szybki start
-Wymagania
-Python 3.7+
-pip
+## 🛠️ Technologie
 
-Instalacja
-bash# Sklonuj repozytorium
+- **Backend:** Python Flask
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap 5
+- **Baza danych:** SQLite
+- **Bezpieczeństwo:** bcrypt (hashowanie haseł)
+- **UI Framework:** Bootstrap 5.3.0
+- **Ikony:** FontAwesome 6.0.0
+
+## ⚡ Szybki start
+
+### Wymagania
+- Python 3.7+
+- pip
+
+### Instalacja
+
+```bash
+# Sklonuj repozytorium
 git clone https://github.com/xedyn/LibraryHub.git
 cd LibraryHub
 
@@ -31,61 +37,56 @@ pip install flask flask-login bcrypt
 
 # Uruchom aplikację
 python app.py
-Dostęp
-Otwórz przeglądarkę i wejdź na: http://localhost:5000
+```
 
-Domyślne konto admin
-Login: admin
-Hasło: admin123
+### Dostęp
+Otwórz przeglądarkę i wejdź na: **http://localhost:5000**
 
-🎯 Funkcjonalności
-👤 Dla użytkowników:
-✅ Rejestracja i logowanie
-✅ Przeglądanie katalogu książek
-✅ Wyszukiwanie po tytule, autorze, ISBN
-✅ Wypożyczanie książek (limit: 3 książki)
-✅ Zwracanie książek
-✅ Profil z historią wypożyczeń
-✅ Automatyczne odliczanie czasu zwrotu
-✅ Podgląd kar za spóźnienia
+### Domyślne konto admin
+- **Login:** admin
+- **Hasło:** admin123
 
-🔧 Dla administratorów:
-✅ Dodawanie książek z ISBN
-✅ Edycja i usuwanie książek
-✅ Zarządzanie użytkownikami
-✅ Przeglądanie profili użytkowników
-✅ Zarządzanie karami
-✅ Oznaczanie książek jako zwrócone
-✅ Statystyki najpopularniejszych książek
+## 🎯 Funkcjonalności
 
-📊 Funkcje biznesowe
-System wypożyczeń:
-Limit: 3 książki na użytkownika
-Okres: 30 dni
-Kary: 0,60 PLN za dzień spóźnienia
-ISBN: Walidacja i unikalność numerów
+### 👤 Dla użytkowników:
+- ✅ Rejestracja i logowanie
+- ✅ Przeglądanie katalogu książek
+- ✅ Wyszukiwanie po tytule, autorze, ISBN
+- ✅ Wypożyczanie książek (limit: 3 książki)
+- ✅ Zwracanie książek
+- ✅ Profil z historią wypożyczeń
+- ✅ Automatyczne odliczanie czasu zwrotu
+- ✅ Podgląd kar za spóźnienia
 
-Bezpieczeństwo:
-Hashowanie haseł (bcrypt)
-Walidacja wszystkich danych wejściowych
-Kontrola uprawnień administratora
-Sesje użytkowników
+### 🔧 Dla administratorów:
+- ✅ Dodawanie książek z walidacją ISBN
+- ✅ Edycja i usuwanie książek
+- ✅ Zarządzanie użytkownikami
+- ✅ Przeglądanie profili użytkowników
+- ✅ Zarządzanie karami
+- ✅ Oznaczanie książek jako zwrócone
+- ✅ Statystyki najpopularniejszych książek
 
-📱 Interfejs
-Responsywny design - działa na komputerze i telefonie
-Kolorystyka dopasowana do logo - żółty, czerwony, niebieski, zielony
-Automatyczny timer - odliczanie czasu w czasie rzeczywistym (aktualizowane co minute)
-Intuicyjna nawigacja - przejrzyste menu i przyciski
+## 📊 Funkcje biznesowe
 
-🗄️ Struktura bazy danych
-users - użytkownicy i administratorzy
-books - katalog książek z ISBN
-borrows - wypożyczenia z terminami
-fines - kary za spóźnienia
+### System wypożyczeń:
+- **Limit:** 3 książki na użytkownika
+- **Okres:** 30 dni
+- **Kary:** 0,60 PLN za dzień spóźnienia
+- **ISBN:** Walidacja i unikalność numerów
 
+### Bezpieczeństwo:
+- Hashowanie haseł (bcrypt)
+- Walidacja wszystkich danych wejściowych
+- Kontrola uprawnień administratora
+- Bezpieczne sesje użytkowników
+
+## 📁 Struktura projektu
+
+```
 LibraryHub/
 ├── 📄 app.py                           # Główny plik aplikacji Flask
-├── 📄 README.md                        # Dokumentacja GitHub
+├── 📄 README.md                        # Dokumentacja projektu
 ├── 📂 database/                        # Folder bazy danych
 │   ├── 📄 .gitkeep                     
 │   └── 📄 library.db                   # Baza SQLite (auto-tworzona)
@@ -102,13 +103,44 @@ LibraryHub/
 │   ├── 📄 edit_user.html               # Edycja użytkownika (admin)
 │   ├── 📄 manage_fines.html            # Zarządzanie karami (admin)
 │   └── 📄 popular.html                 # Popularne książki
-└──  📂 static/                          # Pliki statyczne
+└── 📂 static/                          # Pliki statyczne
     └── 📄 logo.png                     # Logo aplikacji
+```
 
-👥 Zespół
-One man army -> Krzysztof Rot
+# 🗄️ Struktura bazy danych
 
-📄 Licencja
+## 📊 Schemat relacyjny
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│    users    │    │    books    │    │   borrows   │    │    fines    │
+├─────────────┤    ├─────────────┤    ├─────────────┤    ├─────────────┤
+│ id (PK)     │    │ id (PK)     │    │ id (PK)     │    │ id (PK)     │
+│ username    │    │ title       │    │ user_id (FK)│    │ user_id (FK)│
+│ email       │    │ author      │    │ book_id (FK)│    │ amount      │
+│ password    │    │ isbn        │    │ borrow_date │    │ reason      │
+│ is_admin    │    │ available   │    │ due_date    │    │ paid        │
+│ created_at  │    │ created_at  │    │ return_date │    │ created_at  │
+└─────────────┘    └─────────────┘    │ returned    │    └─────────────┘
+                                      └─────────────┘
+```
+
+## 🔒 Bezpieczeństwo danych
+
+### Hashowanie haseł:
+```python
+# Używanie bcrypt z salt rounds = 12
+password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+```
+
+## 👥 Autor
+
+**Krzysztof Rot**
+
+## 📄 Licencja
+
 Projekt został stworzony na potrzeby zaliczenia przedmiotu.
 
-LibraryHub - Nowoczesne zarządzanie biblioteką! 📚✨
+---
+
+*LibraryHub - System Zarządzania Biblioteką 📚*
